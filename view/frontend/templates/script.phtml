@@ -23,7 +23,7 @@
     <div class="icon-plus gray w25"></div>
 </div>
 <?php
-$serviceWorkerJs = $block->getSecureUrl().'service-worker.js';
+$serviceWorkerJs = $block->getUrl('webpushnotification/serviceWorker/index');
 $helper   = $block->helperObject();
 $publickey = $helper->getPublicKey();
 $browser = $block->getBrowser();
