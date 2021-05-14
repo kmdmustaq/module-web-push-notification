@@ -39,25 +39,23 @@ class Index extends Action
     /**
      * @var Lof\WebPushNotification\Helper\Data
      */
-    protected $data;
+    protected $dataHelper;
 
     public function __construct(
         Context $context,
         \Lof\WebPushNotification\Helper\Data $data,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
-        ResultFactory $resultFactory,
-        \Magento\Framework\Module\Dir\Reader $moduleReader
+        ResultFactory $resultFactory
     ) {
-        $this->_baseDirectory = $moduleReader;
         $this->_date = $date;
-        $this->data = $data;
+        $this->dataHelper = $data;
         $this->resultFactory = $resultFactory;
         parent::__construct($context);
     }
 
     public function execute()
     {
-        $swTemplate = "";
+        $swTemplate = $this->dataHelper->getFCMServiceWorkerContent();
         $response = $this->resultFactory->create(ResultFactory::TYPE_RAW);
         $response->setHeader('Content-type', 'application/javascript');
         $response->setHeader('Access-Control-Allow-Origin', '*');

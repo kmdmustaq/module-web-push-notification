@@ -132,6 +132,18 @@ class PushNotificationRepository implements PushNotificationRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function getPushNotification($registrationId, $endPoint)
+    {
+        $collection = $this->pushNotificationCollectionFactory->create();
+        $collection->addFieldToFilter("registration_id", $registrationId)
+                   ->addFieldToFilter("end_point", $endPoint);
+        $data = $collection->getFirstItem();
+        return $data->getDataModel();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getList(
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {

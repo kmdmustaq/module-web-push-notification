@@ -15,60 +15,64 @@
 					<comment/>
 					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
 				</field>
-				<field id="fcm_app_api_key" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_api_key" type="obscure" sortOrder="15" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Application Api Key</label>
 					<comment/>
 					<validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 				</field>
-				<field id="fcm_app_auth_domain" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_auth_domain" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Auth Domain</label>
 					<comment/>
 					<validate>required-entry</validate>
 				</field>
-				<field id="fcm_app_database_url" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_database_url" type="text" sortOrder="25" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Database Url</label>
 					<comment/>
 					<validate>required-entry</validate>
 				</field>
-				<field id="fcm_app_project_id" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_project_id" type="text" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Project ID</label>
 					<comment/>
 					<validate>required-entry</validate>
 				</field>
-				<field id="fcm_app_store_bucket" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_store_bucket" type="text" sortOrder="35" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Store Bucket</label>
 					<comment/>
 					<validate>required-entry</validate>
 				</field>
-				<field id="fcm_app_sender_id" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_sender_id" type="obscure" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Sender ID</label>
 					<comment/>
 					<validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 				</field>
-				<field id="fcm_app_id" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="fcm_app_id" type="obscure" sortOrder="45" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>FCM Application ID</label>
 					<comment/>
 					<validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 				</field>
-				<field id="server_key" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="server_key" type="obscure" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Server Key</label>
 					<comment/>
 					<validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 				</field>
-				<field id="public_key" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="public_key" type="obscure" sortOrder="55" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Public Key</label>
 					<comment/>
 					<validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 				</field>
-				<field id="measurement_id" translate="label" sortOrder="6" type="obscure" showInDefault="1" showInWebsite="0" showInStore="0">
+				<field id="measurement_id" translate="label" sortOrder="60" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Measurement Id</label>
                     <validate>required-entry</validate>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+				<field id="debug" translate="label" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
 			</group>
 		</section>

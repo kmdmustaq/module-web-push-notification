@@ -1,0 +1,97 @@
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+workbox.setConfig({
+  skipWaiting: true,
+  clientsClaim: true,
+  debug: %debug%
+});
+const version = %version%;
+workbox.loadModule('workbox-expiration');
+workbox.loadModule('workbox-background-sync');
+
+/**
+ * installing service worker
+ */
+self.addEventListener(
+    'install',
+    function (event) {
+        event.waitUntil(
+            // eslint-disable-next-line no-restricted-globals
+            self.skipWaiting(),
+        );
+    }
+);
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+  var url;
+  if (event.notification.data) {
+    url = event.notification.data.url;
+  } else {
+    url = event.notification.actions[0].action;
+  }
+  event.waitUntil(
+    clients.openWindow(url)
+  );
+});
+
+/**
+ * listener for push notification
+ */
+self.addEventListener(
+    'push',
+    function (event) {
+        Logging(event.data);
+        Logging(event.data.text());
+        try {
+            var dataa = JSON.parse(event.data.json().data.notification);
+            event.waitUntil(
+                self.registration.showNotification(
+                    dataa.title,
+                    {
+                        body: dataa.body,
+                        icon: dataa.icon,
+                        vibrate: 1,
+                        actions: dataa.actions
+                    }
+                )
+            );
+        } catch(e) {
+            event.waitUntil(
+                self.registration.showNotification(
+                    event.data.text()
+                )
+            );
+        }
+    }
+);
+
+
+/**
+ * Logging function to log
+ *
+ * @param {mixed} $log
+ */
+function Logging()
+{
+    var canLog = %debug%;
+    if (canLog) {
+        console.log(arguments);
+    }
+};
+
+function ext(url)
+{
+    return (url = url.substr(1 + url.lastIndexOf("/")).split('?')[0]).split('#')[0].substr(url.lastIndexOf("."));
+}
+
+function isValidHttpUrl(string) {
+    let url;
+
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+}

@@ -31,6 +31,15 @@ interface PushNotificationRepositoryInterface
     public function get($pushnotificationId);
 
     /**
+     * Retrieve PushNotification
+     * @param string $registrationId
+     * @param string $endPoint
+     * @return \Lof\WebPushNotification\Api\Data\PushNotificationInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getPushNotification($registrationId, $endPoint);
+
+    /**
      * Retrieve PushNotification matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Lof\WebPushNotification\Api\Data\PushNotificationSearchResultsInterface

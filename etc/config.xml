@@ -3,7 +3,7 @@
 	<default>
 		<lofwebpushnotification>
 			<general>
-				<enabled/>
+				<enabled>1</enabled>
 				<app_api_key/>
 				<fcm_app_auth_domain/>
 				<fcm_app_database_url/>
@@ -11,6 +11,10 @@
 				<fcm_app_store_bucket/>
 				<fcm_app_sender_id/>
 				<fcm_app_id/>
+				<server_key/>
+				<public_key/>
+				<measurement_id/>
+				<debug>0</debug>
 			</general>
 		</lofwebpushnotification>
 	</default>

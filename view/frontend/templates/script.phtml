@@ -20,7 +20,7 @@
  */
 ?>
 <div class="lof-web-prompt" id="lof-web-prompt-id" style="display:none">
-    <div class="icon-plus gray w25"></div>
+<div class="icon-plus gray w25"></div>
 </div>
 <?php
 $serviceWorkerJs = $block->getUrl('webpushnotification/serviceWorker/index');
@@ -48,13 +48,18 @@ require([
             appId: '<?= $block->escapeHtml($helper->getFCMConfigEncrypted('fcm_app_id')) ?>',
             measurementId: '<?= $block->escapeHtml($helper->getFCMConfigEncrypted('measurement_id')) ?>'
         };
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        if (firebase.messaging.isSupported()) {
-            firebase.analytics();
-        }
         let isSubscribed;
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        function isSentServerToken() {
+            return window.localStorage.getItem('sentServerToken') === '1';
+        }
+
+        function setSentServerToken(sentStatus) {
+            window.localStorage.setItem('sentServerToken', sent ? '1' : '0');
+        }
+
         function saveEndPointForLaterUse(registrationId, endpoint) {
             $.ajax({
                 url: '<?= $block->escapeUrl($block->getUrl('webpushnotification/index/index'))?>',
@@ -82,12 +87,10 @@ require([
                 });
 
                 wb.addEventListener('activated', (event) => {
-                    // Get the current page URL + all resources the page loaded.
                     const urlsToCache = [
                         location.href,
                         ...performance.getEntriesByType('resource').map((r) => r.name),
                     ];
-                    // Send that list of URLs to your router in the service worker.
                     wb.messageSW({
                         type: 'CACHE_URLS',
                         payload: {urlsToCache},
@@ -106,8 +109,47 @@ require([
         } else {
             console.log('<?= $block->escapeHtml(__("Service Workers are not supported in this browser"))?>');
         }
-        
-        function initInstaller() {
+
+        function initializeUI() {
+                const messaging = firebase.messaging();
+                messaging.getToken().then((curToken) => {
+                        if (curToken) {
+                            sendTokenToServer(curToken);
+                        } else {
+                            console.log('No Instance ID token available. Request permission to generate one.');
+                            requestPermission();
+                            setSentServerToken(false);
+                        }
+                    }).catch((err) => {
+                        console.log('An error occurred while retrieving token. ', err);
+                        setSentServerToken(false);
+                    });
+        }
+
+        function sendTokenToServer(currentToken) {
+            if (!isSentServerToken()) {
+                console.log('Sending token to server...');
+                setSentServerToken(true);
+                saveEndPointForLaterUse(currentToken, currentToken)
+            } else {
+                console.log('Token already sent to server so won\'t send it again unless it changes.');
+            }
+        }
+
+        function requestPermission() {
+            console.log('Requesting permission...');
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                    initializeUI();
+                } else {
+                    console.log('Unable to get permission to notify.');
+                }
+            });
+        }
+    }
+)
+function initInstaller() {
             let deferredPrompt;
             var win_wid = jQuery(window).width()
             var iframe = document.getElementsByTagName("iframe");
@@ -139,7 +181,5 @@ require([
                     deferredPrompt = null;
                 })
             })
-        }
-    }
-)
+}
 </script>

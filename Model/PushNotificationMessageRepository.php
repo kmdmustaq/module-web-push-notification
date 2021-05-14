@@ -21,10 +21,13 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Api\Search\SearchCriteriaInterfaceFactory;
 
 class PushNotificationMessageRepository implements PushNotificationMessageRepositoryInterface
 {
 
+    /** @var SearchCriteriaInterfaceFactory */
+    private $searchCriteriaFactory;
     protected $dataPushNotificationMessageFactory;
 
     protected $resource;
@@ -59,6 +62,7 @@ class PushNotificationMessageRepository implements PushNotificationMessageReposi
      * @param CollectionProcessorInterface $collectionProcessor
      * @param JoinProcessorInterface $extensionAttributesJoinProcessor
      * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
+     * @param SearchCriteriaInterfaceFactory $searchCriteriaFactory
      */
     public function __construct(
         ResourcePushNotificationMessage $resource,
@@ -71,7 +75,8 @@ class PushNotificationMessageRepository implements PushNotificationMessageReposi
         StoreManagerInterface $storeManager,
         CollectionProcessorInterface $collectionProcessor,
         JoinProcessorInterface $extensionAttributesJoinProcessor,
-        ExtensibleDataObjectConverter $extensibleDataObjectConverter
+        ExtensibleDataObjectConverter $extensibleDataObjectConverter,
+        SearchCriteriaInterfaceFactory $searchCriteriaFactory
     ) {
         $this->resource = $resource;
         $this->pushNotificationMessageFactory = $pushNotificationMessageFactory;
@@ -84,6 +89,7 @@ class PushNotificationMessageRepository implements PushNotificationMessageReposi
         $this->collectionProcessor = $collectionProcessor;
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
         $this->extensibleDataObjectConverter = $extensibleDataObjectConverter;
+        $this->searchCriteriaFactory = $searchCriteriaFactory;
     }
 
     /**
@@ -127,6 +133,21 @@ class PushNotificationMessageRepository implements PushNotificationMessageReposi
             throw new NoSuchEntityException(__('PushNotificationMessage with id "%1" does not exist.', $pushNotificationMessageId));
         }
         return $pushNotificationMessage->getDataModel();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getActivePushNotificationMessage()
+    {
+        $collection = $this->pushNotificationMessageCollectionFactory->create()
+                            ->addFieldToFilter('status', 1);
+        $collection->load();
+        $items = [];
+        foreach ($collection as $model) {
+            $items[] = $model->getDataModel();
+        }
+        return $items;
     }
 
     /**

@@ -39,6 +39,12 @@ interface PushNotificationMessageRepositoryInterface
     public function getList(
         \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
     );
+    /**
+     * Retrieve Active PushNotificationMessage.
+     * @return \Lof\WebPushNotification\Api\Data\PushNotificationMessageInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getActivePushNotificationMessage();
 
     /**
      * Delete PushNotificationMessage

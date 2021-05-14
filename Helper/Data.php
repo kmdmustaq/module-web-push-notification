@@ -43,25 +43,10 @@ class Data extends AbstractHelper
     protected $_imageFactory;
 
     /**
-     * @param Magento\Framework\App\Helper\Context      $context
-     * @param Magento\Store\Model\StoreManagerInterface $storeManager
+     * @var \Magento\Framework\Module\Dir\Reader
      */
-    public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Encryption\EncryptorInterface $encryptor,
-        \Magento\Framework\Filesystem $filesystem,
-        \Magento\Framework\Image\AdapterFactory $imageFactory,
-        \Magento\Framework\Filesystem\Io\File $filesystemFile
-    ) {
-        $this->_storeManager = $storeManager;
-        $this->_encryptor = $encryptor;
-        $this->_imageFactory = $imageFactory;
-        $this->filesystemFile = $filesystemFile;
-        parent::__construct($context);
+    protected $_baseDirectory;
 
-        $this->_mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-    }
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -69,6 +54,7 @@ class Data extends AbstractHelper
      * @param \Magento\Framework\Filesystem $filesystem
      * @param \Magento\Framework\Image\AdapterFactory $imageFactory
      * @param \Magento\Framework\Filesystem\Io\File $filesystemFile
+     * @param \Magento\Framework\Module\Dir\Reader $moduleReader
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -76,7 +62,8 @@ class Data extends AbstractHelper
         \Magento\Framework\Encryption\EncryptorInterface $encryptor,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Image\AdapterFactory $imageFactory,
-        \Magento\Framework\Filesystem\Io\File $filesystemFile
+        \Magento\Framework\Filesystem\Io\File $filesystemFile,
+        \Magento\Framework\Module\Dir\Reader $moduleReader
     ) {
         $this->_storeManager = $storeManager;
         $this->_encryptor = $encryptor;
@@ -84,6 +71,7 @@ class Data extends AbstractHelper
         $this->filesystemFile = $filesystemFile;
         parent::__construct($context);
         $this->_mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $this->_baseDirectory = $moduleReader;
     }
 
     /**
@@ -184,6 +172,24 @@ class Data extends AbstractHelper
     public function getFCMConfigEncrypted($value)
     {
         return $this->_encryptor->decrypt($this->getConfig('general/'.$value));
+    }
+
+    public function getCanDebug() {
+        return $this->getConfig('general/debug');
+    }
+
+    public function getFCMServiceWorkerContent() {
+        $version = 1;
+        $debug = $this->getCanDebug();
+        $swTemplate = @file_get_contents($this->_baseDirectory->getModuleDir(
+            \Magento\Framework\Module\Dir::MODULE_ETC_DIR,
+            'Lof_WebPushNotification'
+        )."/templates/fcm-service-worker.js.dist");
+
+        $swTemplate = str_replace("%version%", $version, $swTemplate);
+        $swTemplate = str_replace("%debug%", $debug, $swTemplate);
+             
+        return $swTemplate;
     }
 
 }
