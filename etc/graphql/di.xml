@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+		<arguments>
+			<argument name="extendedConfigData" xsi:type="array">
+				<item name="lofwebpushnotification_general_settings_enabled" xsi:type="string">lofwebpushnotification/general_settings/enabled</item>
+				<item name="lofwebpushnotification_general_settings_app_api_key" xsi:type="string">lofwebpushnotification/general_settings/app_api_key</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_auth_domain" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_auth_domain</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_database_url" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_database_url</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_project_id" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_project_id</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_store_bucket" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_store_bucket</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_sender_id" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_sender_id</item>
+				<item name="lofwebpushnotification_general_settings_fcm_app_id" xsi:type="string">lofwebpushnotification/general_settings/fcm_app_id</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

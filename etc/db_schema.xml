@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="lof_webpushnotification_pushnotification" resource="default" engine="innodb" comment="lof_webpushnotification_pushnotification Table">
+		<column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="registration_id" nullable="true" xsi:type="text" comment="registration_id"/>
+		<column name="end_point" nullable="true" xsi:type="text" comment="end_point"/>
+		<column name="created_at" nullable="true" xsi:type="timestamp" comment="created_at" default="CURRENT_TIMESTAMP"/>
+		<column name="updated_at" nullable="true" xsi:type="timestamp" comment="updated_at" default="CURRENT_TIMESTAMP" on_update="true"/>
+	</table>
+	<table name="lof_webpushnotification_pushnotificationmessage" resource="default" engine="innodb" comment="lof_webpushnotification_pushnotificationmessage Table">
+		<column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="title" nullable="true" xsi:type="text" comment="title"/>
+		<column name="body" nullable="true" xsi:type="text" comment="body"/>
+		<column name="url" nullable="true" xsi:type="text" comment="url"/>
+		<column name="icon" nullable="true" xsi:type="text" comment="icon"/>
+		<column name="status" nullable="true" xsi:type="smallint" comment="status" default="0" unsigned="true"/>
+		<index referenceId="LOF_WEBPUSHNOTIFICATION_PUSHNOTIFICATIONMESSAGE_STATUS" indexType="btree">
+			<column name="status"/>
+		</index>
+		<column name="created_at" nullable="true" xsi:type="timestamp" comment="created_at" default="CURRENT_TIMESTAMP"/>
+		<column name="updated_at" nullable="true" xsi:type="timestamp" comment="updated_at" default="CURRENT_TIMESTAMP" on_update="true"/>
+	</table>
+</schema>

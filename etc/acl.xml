@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Lof_WebPushNotification::notification" title="Push Notification" sortOrder="10">
+					<resource id="Lof_WebPushNotification::notification_save" title="Save Push Notification" sortOrder="10"/>
+					<resource id="Lof_WebPushNotification::notification_delete" title="Delete Push Notification" sortOrder="20"/>
+					<resource id="Lof_WebPushNotification::notification_update" title="Update Push Notification" sortOrder="30"/>
+					<resource id="Lof_WebPushNotification::notification_view" title="View Push Notification" sortOrder="40"/>
+				</resource>
+				<resource id="Lof_WebPushNotification::notificationmessage" title="Push Notification Message" sortOrder="10">
+					<resource id="Lof_WebPushNotification::notificationmessage_save" title="Save Push Notification Message" sortOrder="10"/>
+					<resource id="Lof_WebPushNotification::notificationmessage_delete" title="Delete Push Notification Message" sortOrder="20"/>
+					<resource id="Lof_WebPushNotification::notificationmessage_update" title="Update Push Notification Message" sortOrder="30"/>
+					<resource id="Lof_WebPushNotification::notificationmessage_view" title="View Push Notification Message" sortOrder="40"/>
+				</resource>
+				<resource id="Magento_Backend::stores">
+					<resource id="Magento_Backend::stores_settings">
+						<resource id="Magento_Config::config">
+							<resource id="Lof_WebPushNotification::config" title="Lof Web Push Notification"/>
+						</resource>
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

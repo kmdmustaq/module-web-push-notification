@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Lof\WebPushNotification\Api\PushNotificationRepositoryInterface" type="Lof\WebPushNotification\Model\PushNotificationRepository"/>
+	<preference for="Lof\WebPushNotification\Api\Data\PushNotificationInterface" type="Lof\WebPushNotification\Model\Data\PushNotification"/>
+	<preference for="Lof\WebPushNotification\Api\Data\PushNotificationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Lof\WebPushNotification\Model\ResourceModel\PushNotification\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">lof_webpushnotification_pushnotification</argument>
+			<argument name="resourceModel" xsi:type="string">Lof\WebPushNotification\Model\ResourceModel\PushNotification\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="lof_webpushnotification_pushnotification_listing_data_source" xsi:type="string">Lof\WebPushNotification\Model\ResourceModel\PushNotification\Grid\Collection</item>
+				<item name="lof_webpushnotification_pushnotificationmessage_listing_data_source" xsi:type="string">Lof\WebPushNotification\Model\ResourceModel\PushNotificationMessage\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<preference for="Lof\WebPushNotification\Api\PushNotificationMessageRepositoryInterface" type="Lof\WebPushNotification\Model\PushNotificationMessageRepository"/>
+	<preference for="Lof\WebPushNotification\Api\Data\PushNotificationMessageInterface" type="Lof\WebPushNotification\Model\Data\PushNotificationMessage"/>
+	<preference for="Lof\WebPushNotification\Api\Data\PushNotificationMessageSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Lof\WebPushNotification\Model\ResourceModel\PushNotificationMessage\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">lof_webpushnotification_pushnotificationmessage</argument>
+			<argument name="resourceModel" xsi:type="string">Lof\WebPushNotification\Model\ResourceModel\PushNotificationMessage\Collection</argument>
+		</arguments>
+	</virtualType>
+</config>

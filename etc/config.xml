@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<lofwebpushnotification>
+			<general>
+				<enabled/>
+				<app_api_key/>
+				<fcm_app_auth_domain/>
+				<fcm_app_database_url/>
+				<fcm_app_project_id/>
+				<fcm_app_store_bucket/>
+				<fcm_app_sender_id/>
+				<fcm_app_id/>
+			</general>
+		</lofwebpushnotification>
+	</default>
+</config>

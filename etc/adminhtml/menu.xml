@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Lof::top_level" title="Lof Web Push Notifications" module="Lof_WebPushNotification" sortOrder="100" parent="Magento_Backend::marketing" resource="Lof_WebPushNotification::notification"/>
+		<add id="Lof_WebPushNotification::lof_webpushnotification_pushnotification" title="Push Notification" module="Lof_WebPushNotification" sortOrder="9999" resource="Lof_WebPushNotification::notification" parent="Lof::top_level" action="lof_webpushnotification/pushnotification/index"/>
+		<add id="Lof_WebPushNotification::lof_webpushnotification_pushnotificationmessage" title="Push Notification Messages" module="Lof_WebPushNotification" sortOrder="9999" resource="Lof_WebPushNotification::notification_message" parent="Lof::top_level" action="lof_webpushnotification/pushnotificationmessage/index"/>
+	</menu>
+</config>

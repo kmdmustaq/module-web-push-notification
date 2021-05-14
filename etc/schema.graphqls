@@ -1,0 +1,54 @@
+
+type Query {
+    
+    pushnotifications (
+            id: String @doc(description: "Query by id."),
+            registration_id: String @doc(description: "Query by registration_id."),
+            end_point: String @doc(description: "Query by end_point.")
+    ) : Pushnotifications @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications") @doc(description: "Query by Query push notifications.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications\Identity")
+    pushnotificationmessages (
+            id: String @doc(description: "Query by id."),
+            title: String @doc(description: "Query by title."),
+            body: String @doc(description: "Query by body."),
+            icon: String @doc(description: "Query by icon."),
+            url: String @doc(description: "Query by url."),
+            status: String @doc(description: "Query by status.")
+    ) : Pushnotificationmessages @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages") @doc(description: "Query by Query push notification messages.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages\Identity")
+}
+
+type Pushnotifications {
+    
+    id  : String  @doc(description: "Query by id.") 
+    registration_id  : String  @doc(description: "Query by registration_id.") 
+    end_point  : String  @doc(description: "Query by end_point.") 
+}
+
+type Pushnotificationmessages {
+    
+    id  : String  @doc(description: "Query by id.") 
+    title  : String  @doc(description: "Query by title.") 
+    body  : String  @doc(description: "Query by body.") 
+    icon  : String  @doc(description: "Query by icon.") 
+    url  : String  @doc(description: "Query by url.") 
+    status  : String  @doc(description: "Query by status.") 
+}
+
+type Mutation {
+    
+    registerpushnotification (
+            registration_id: String @doc(description: "Query by registration_id."),
+            end_point: String @doc(description: "Query by end_point.")
+    ) : String @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Registerpushnotification") @doc(description: "Query by Mutation Push Notification Register end point.") 
+}
+
+type StoreConfig {
+    
+    lofwebpushnotification_general_settings_enabled  : String  @doc(description: "Query by lofwebpushnotification_general_settings_enabled.") 
+    lofwebpushnotification_general_settings_app_api_key  : String  @doc(description: "Query by lofwebpushnotification_general_settings_app_api_key.") 
+    lofwebpushnotification_general_settings_fcm_app_auth_domain  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_auth_domain.") 
+    lofwebpushnotification_general_settings_fcm_app_database_url  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_database_url.") 
+    lofwebpushnotification_general_settings_fcm_app_project_id  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_project_id.") 
+    lofwebpushnotification_general_settings_fcm_app_store_bucket  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_store_bucket.") 
+    lofwebpushnotification_general_settings_fcm_app_sender_id  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_sender_id.") 
+    lofwebpushnotification_general_settings_fcm_app_id  : String  @doc(description: "Query by lofwebpushnotification_general_settings_fcm_app_id.") 
+}
