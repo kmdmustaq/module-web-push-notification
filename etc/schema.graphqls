@@ -5,7 +5,7 @@ type Query {
             id: String @doc(description: "Query by id."),
             registration_id: String @doc(description: "Query by registration_id."),
             end_point: String @doc(description: "Query by end_point.")
-    ) : Pushnotifications @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications") @doc(description: "Query by Query push notifications.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications\Identity")
+    ) : Pushnotifications @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications") @doc(description: "Query by Query push notifications.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotifications\\Identity")
     pushnotificationmessages (
             id: String @doc(description: "Query by id."),
             title: String @doc(description: "Query by title."),
@@ -13,7 +13,7 @@ type Query {
             icon: String @doc(description: "Query by icon."),
             url: String @doc(description: "Query by url."),
             status: String @doc(description: "Query by status.")
-    ) : Pushnotificationmessages @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages") @doc(description: "Query by Query push notification messages.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages\Identity")
+    ) : Pushnotificationmessages @resolver( class: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages") @doc(description: "Query by Query push notification messages.") @cache( cacheIdentity: "Lof\\WebPushNotification\\Model\\Resolver\\Pushnotificationmessages\\Identity")
 }
 
 type Pushnotifications {
