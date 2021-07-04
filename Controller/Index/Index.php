@@ -54,7 +54,7 @@ class Index extends Action
         Context $context,
         \Magento\Framework\Json\Helper\Data $data,
         PushNotificationFactory $pushNotificationDataFactory,
-        PushNotificationRepositoryInterface $pushNotificationRepository,
+        PushNotificationRepositoryInterface $pushNotificationRepository
     ) {
         $this->pushNotificationDataFactory = $pushNotificationDataFactory;
         $this->_pushNotificationRepository = $pushNotificationRepository;
