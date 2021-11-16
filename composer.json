@@ -13,7 +13,9 @@
     ],
     "version": "1.0.0",
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+          "minishlink/web-push": "*"
+    },
     "autoload": {
         "files": [
             "registration.php"
